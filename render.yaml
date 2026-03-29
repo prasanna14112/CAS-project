@@ -1,0 +1,26 @@
+# Render Blueprint (optional) — deploys the API only.
+# Create the React Static Site separately in the Render dashboard so you can
+# set VITE_API_URL to your backend URL after the first deploy.
+#
+# In the dashboard, add Environment → MONGO_URI, JWT_SECRET, FRONTEND_URL.
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: cas-backend
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
